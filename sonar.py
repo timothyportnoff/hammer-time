@@ -62,7 +62,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO_TRIGGER = 17
 GPIO_ECHO    = 27
 
-print "Ultrasonic Measurement"
+print("Ultrasonic Measurement")
 
 # Set pins as output and input
 GPIO.setup(GPIO_TRIGGER,GPIO.OUT)  # Trigger

@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import threading
+from tickets import * 
 from motor import * 
 from speaker import * 
 from button import * 
@@ -25,15 +26,8 @@ def setup():
     #GPIO settings
     GPIO.setmode(GPIO.BCM)
 
-    #tim TODO
     #GPIO.setup(START_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # set in as off when initializing
     GPIO.setup(26, GPIO.IN)
-
-    #LEDS
-    #GPIO.setup(YELLOW, GPIO.OUT)
-    #GPIO.setup(BLUE, GPIO.OUT)
-    #GPIO.setup(RED, GPIO.IN)
-    #GPIO.setup(GREEN, GPIO.IN)
 
 #main function
 if __name__ =="__main__":
@@ -41,11 +35,9 @@ if __name__ =="__main__":
     setup()
     print("It's Hammer Time.")
 
-    #Do constant button press checking
+    #check distance
     while True:
-        #if button_is_pressed(START_BUTTON): #GPIO.input(START_BUTTON) == GPIO.HIGH:
-        if .input(START_BUTTON) == GPIO.HIGH:
-            print("start button pressed!")
+        get_distance()
             # Create new threads
             #thread1 = spin_motor(1, "Thread-1-sound", 1)
             #threa2 = play_sound(2, "Thread-2-sound", 2)
@@ -57,7 +49,7 @@ if __name__ =="__main__":
         #elif button_is_pressed(STOP_BUTTON): # Sleep for half a second? FIXME
             #print("stop button pressed!")
         #else: 
-        sleep(1) #Sleep for a second? FIXME
+        sleep(0.1)
 
     #Exit cleanly
     GPIO.cleanup()
