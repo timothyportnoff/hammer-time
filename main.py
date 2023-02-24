@@ -1,11 +1,12 @@
 import RPi.GPIO as GPIO
 import threading
 from tickets import * 
+from led import * 
+from time import sleep
+from sonar import *
 #from motor import * 
 #from speaker import * 
 #from button import * 
-from led import * 
-from time import sleep
 
 #CONSTANTS
 POTENTIOMMETER = 0
@@ -16,9 +17,11 @@ ECHO = 27
 #BUZZER = 0
 #KNOB = 0
 #MOTOR = 0
-RED = 0
-YELLOW = 0
-GREEN = 0
+
+#LED'S
+RED = 2
+YELLOW = 3
+GREEN = 4
 #BLUE = 0
 
 #SETUP
