@@ -1,9 +1,9 @@
 import RPi.GPIO as GPIO
 import threading
 from tickets import * 
-from motor import * 
-from speaker import * 
-from button import * 
+#from motor import * 
+#from speaker import * 
+#from button import * 
 from led import * 
 from time import sleep
 
@@ -16,40 +16,42 @@ ECHO = 27
 #BUZZER = 0
 #KNOB = 0
 #MOTOR = 0
-#YELLOW = 0
-#GREEN = 0
+RED = 0
+YELLOW = 0
+GREEN = 0
 #BLUE = 0
-#RED = 0
 
 #SETUP
 def setup():
     #GPIO settings
     GPIO.setmode(GPIO.BCM)
-
-    #GPIO.setup(START_BUTTON, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # set in as off when initializing
     GPIO.setup(26, GPIO.IN)
 
 #main function
 if __name__ =="__main__":
     #Welcome, and setup
-    setup()
     print("It's Hammer Time.")
+    setup()
 
     #check distance
     while True:
-        get_distance()
-            # Create new threads
-            #thread1 = spin_motor(1, "Thread-1-sound", 1)
-            #threa2 = play_sound(2, "Thread-2-sound", 2)
-
-            # Start new Threads
-            #thread1.start()
-            #thread2.start()
-
-        #elif button_is_pressed(STOP_BUTTON): # Sleep for half a second? FIXME
-            #print("stop button pressed!")
-        #else: 
+        puck_seen = 0
+        #DISTANCE = get_distance()
+        if within_sonar_range(90):
+            puck_seen = puckseen + 1
+            led_on(RED)
+            if within_sonar_range(60):
+                puck_seen = puckseen + 1
+                led_on(YELLOW)
+                if within_sonar_range(30):
+                    puck_seen = puckseen + 1
+                    led_on(GREEN)
         sleep(0.1)
+        if puck_seen > 0:
+            break
+        sleep(0.1)
+        print_tickets()
 
     #Exit cleanly
+    print("Exiting program.")
     GPIO.cleanup()
