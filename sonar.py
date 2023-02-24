@@ -28,16 +28,16 @@ def measure():
     GPIO.output(GPIO_TRIGGER, False)
     start = time.time()
 
-  while GPIO.input(GPIO_ECHO)==0:
-      start = time.time()
+    while GPIO.input(GPIO_ECHO)==0:
+        start = time.time()
 
-  while GPIO.input(GPIO_ECHO)==1:
-      stop = time.time()
+    while GPIO.input(GPIO_ECHO)==1:
+        stop = time.time()
 
-  elapsed = stop-start
-  distance = (elapsed * 34300)/2
+    elapsed = stop-start
+    distance = (elapsed * 34300)/2
 
-  return distance
+    return distance
 
 def measure_average():
     # This function takes 3 measurements and returns the average.
@@ -67,10 +67,10 @@ def measure_better_distance():
 
 # This function takes in a distance and returns a boolean.
 def within_sonar_range(CM):
-    if measure_better_distance() < CM return True       #Try 1
-    else if measure_better_distance() < CM return True  #Try 2
-    else if measure_better_distance() < CM return True  #Try 3
-    else return False
+    if measure_better_distance() < CM: return True       #Try 1
+    elif measure_better_distance() < CM: return True  #Try 2
+    elif measure_better_distance() < CM: return True  #Try 3
+    else: return False
 
     # -----------------------
 # Main Script
