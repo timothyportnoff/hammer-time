@@ -1,7 +1,8 @@
-#call.py>
+#call.py
 #function
 import RPi.GPIO as GPIO
 import time
+from config import *
 
 def TICKETS():
     
@@ -11,11 +12,8 @@ def TICKETS():
     in4 = 22
 
     points = 0
-
     step_sleep = 0.002
-
     step_count = 4096
-
     direction = False
 
     step_sequence = [[1,0,0,1],
@@ -40,14 +38,7 @@ def TICKETS():
     
     motor_pins = [in1,in2,in3,in4]
 
-
-
-
     motor_step_counter = 0
-    print( "Welcome to Step Motor testing ;)")
-    points = int(input( 'how many points did you score: ' ))
-    print('You scored: ' , points)
-    
     i = 0
     step_count = points * 10
     for i in range(step_count):
@@ -55,13 +46,9 @@ def TICKETS():
             GPIO.output( motor_pins[pin], step_sequence[motor_step_counter][pin])
             if direction==True:
                 motor_step_counter = (motor_step_counter - 1) % 8
-            elif direction==False:
-                motor_step_counter = (motor_step_counter + 1) % 8
             else:
-                print( " WHAT IN THE FUCK DID YOU DO IT SHOULD BE TRUE OR FALSE YOU DUMBASS" )
-                cleanup()
-                exit(1)
-            time.sleep( step_sleep )
+                motor_step_counter = (motor_step_counter + 1) % 8
+            time.sleep(step_sleep)
     
     GPIO.output(in1, GPIO.LOW )
     GPIO.output(in2, GPIO.LOW )
